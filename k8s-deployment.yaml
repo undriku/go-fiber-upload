@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-fiber-upload
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: go-fiber-upload
+  template:
+    metadata:
+      labels:
+        app: go-fiber-upload
+    spec:
+      containers:
+      - name: go-fiber-upload
+        image: go-fiber-upload
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 50000
