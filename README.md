@@ -34,37 +34,51 @@ For this application I am going to use Minikube environment. In this example I a
 
 * Build the docker image 
 
-``` docker -t go-fiber-upload -t . ```
-Based on your environment it may take sometime for first build
+``` 
+docker -t go-fiber-upload -t . 
+```
+Based on your environment it may take sometime for first build 
+
 
 * Execute the command to deploy the application in Minikube cluster
 
-``` kubectl apply -f k8s-deployment.yaml ```
+``` 
+kubectl apply -f k8s-deployment.yaml
 deployment.apps/go-fiber-upload created
+```
 
 * Execute the below commnad to check that pods are create successfully
 
-``` kubectl get pods ```
+``` 
+kubectl get pods
 NAME                               READY   STATUS    RESTARTS   AGE
 go-fiber-upload-6df66f6dd6-6njbd   1/1     Running   0          36m
 go-fiber-upload-6df66f6dd6-nnklj   1/1     Running   0          36m
 go-fiber-upload-6df66f6dd6-s6mnz   1/1     Running   0          36m
+```
 
 * Execute the command to expose the service using type NodePort
 
-``` kubectl expose deployment go-fiber-upload --type=NodePort ```
+``` 
+kubectl expose deployment go-fiber-upload --type=NodePort
 service/go-fiber-upload exposed
+```
 
-``` kubectl get service ```
+``` 
+kubectl get service
 NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)           AGE
 go-fiber-upload   NodePort    10.102.3.107    <none>        50000:32760/TCP   24s
+```
 
 * Use the command to get the url of the service
 
-``` minikube service go-fiber-upload --url ```
+``` 
+minikube service go-fiber-upload --url
 http://172.17.0.2:32760
-
+```
 * Execute the command to check that service can be accessed successfully
 
-``` curl http://172.17.0.2:32760/ping ```
+``` 
+curl http://172.17.0.2:32760/ping
 PONG
+```
